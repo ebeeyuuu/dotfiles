@@ -32,80 +32,8 @@ vim.cmd([[
 
 vim.cmd("set wrap")
 
-local null_ls = require("null-ls")
-local prettier = require("prettier")
-
 local nvim_lspconfig = require("lspconfig")
 nvim_lspconfig.pyright.setup({})
-
-local lsp_format_on_save = vim.api.nvim_create_augroup("lsp_format_on_save", { clear = true })
-
-null_ls.setup({
-  sources = {
-    null_ls.builtins.formatting.prettier,
-  },
-  on_attach = function(client, bufnr)
-    if client.supports_method("textDocument/formatting") then
-      vim.keymap.set("n", "<Leader>f", function()
-        vim.lsp.buf.format({ bufnr = vim.api.nvim_get_current_buf() })
-      end, { buffer = bufnr, desc = "[lsp] format" })
-
-      vim.api.nvim_clear_autocmds({ group = lsp_format_on_save, buffer = bufnr })
-
-      vim.api.nvim_create_autocmd("BufWritePre", {
-        buffer = bufnr,
-        group = lsp_format_on_save,
-        callback = function()
-          vim.lsp.buf.format({ bufnr = bufnr, async = true })
-        end,
-        desc = "[lsp] format on save",
-      })
-    end
-
-    if client.supports_method("textDocument/rangeFormatting") then
-      vim.keymap.set("x", "<Leader>f", function()
-        vim.lsp.buf.format({ bufnr = vim.api.nvim_get_current_buf() })
-      end, { buffer = bufnr, desc = "[lsp] format" })
-    end
-  end,
-})
-
-prettier.setup({
-  bin = "prettier", -- or `'prettierd'` (v0.23.3+)
-  filetypes = {
-    "css",
-    "graphql",
-    "html",
-    "javascript",
-    "javascriptreact",
-    "json",
-    "less",
-    "markdown",
-    "scss",
-    "typescript",
-    "typescriptreact",
-    "yaml",
-  },
-  cli_options = {
-    arrow_parens = "always",
-    bracket_spacing = true,
-    bracket_same_line = false,
-    embedded_language_formatting = "auto",
-    end_of_line = "lf",
-    html_whitespace_sensitivity = "css",
-    jsx_single_quote = false,
-    print_width = 80,
-    prose_wrap = "preserve",
-    quote_props = "as-needed",
-    semi = true,
-    single_attribute_per_line = false,
-    single_quote = false,
-    tab_width = 2,
-    trailing_comma = "es5",
-    use_tabs = false,
-    vue_indent_script_and_style = false,
-  },
-})
 
 require("telescope").setup({
   defaults = {
