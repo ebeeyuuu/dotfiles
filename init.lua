@@ -121,22 +121,3 @@ require("telescope").setup({
     },
   },
 })
-
-vim.api.nvim_set_keymap("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<Space>e", ":Telescope file_browser<cr>", { noremap = true, silent = true })
-
-vim.fn.sign_define("DiagnosticSignError", { text = "", texthl = "DiagnosticError" }) -- Error
-vim.fn.sign_define("DiagnosticSignWarn", { text = "", texthl = "DiagnosticWarn" }) -- Warning
-vim.fn.sign_define("DiagnosticSignInfo", { text = "", texthl = "DiagnosticInfo" }) -- Info
-vim.fn.sign_define("DiagnosticSignHint", { text = "", texthl = "DiagnosticHint" }) -- Hint
-
-vim.api.nvim_set_keymap("n", "BB", ":BufferClose<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap(
-  "n",
-  "BG",
-  [[:lua vim.cmd('BufferGoto ' .. string.char(vim.fn.getchar()))<CR>]],
-  { noremap = true, silent = true }
-)
-vim.api.nvim_set_keymap("n", "BN", ":BufferNext<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "BP", ":BufferPrevious<CR>", { noremap = true, silent = true })
