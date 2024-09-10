@@ -13,9 +13,9 @@ vim.api.nvim_set_keymap("n", "<Space>e", ":Telescope file_browser<cr>", { norema
 vim.api.nvim_set_keymap("n", "BB", ":BufferClose<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap(
   "n",
-  "BG",
+  "B",
   [[:lua vim.cmd('BufferGoto ' .. string.char(vim.fn.getchar()))<CR>]],
   { noremap = true, silent = true }
 )
-vim.api.nvim_set_keymap("n", "BN", ":BufferNext<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "BP", ":BufferPrevious<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "BJ", ":BufferNext<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "BL", ":BufferPrevious<CR>", { noremap = true, silent = true })
