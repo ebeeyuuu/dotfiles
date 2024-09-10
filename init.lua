@@ -197,3 +197,13 @@ prettier.setup({
 })
 
 vim.opt.termguicolors = true
+
+vim.notify = require("notify")
+
+require("notify").setup({
+  stages = "fade_in_slide_out",
+  timeout = 3000,
+  background_colour = "#000000",
+})
+
+vim.notify("Welcome back Ean.", vim.log.levels.INFO)
