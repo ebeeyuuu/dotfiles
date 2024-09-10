@@ -27,6 +27,7 @@ vim.cmd([[
     Plug 'nvim-lualine/lualine.nvim'
     Plug 'romgrk/barbar.nvim'
     Plug 'lewis6991/gitsigns.nvim'
+    Plug 'onsails/lspkind.nvim'
   call plug#end()
 ]])
 
@@ -47,5 +48,206 @@ require("telescope").setup({
     find_files = {
       sorter = require("telescope.sorters").get_fzy_sorter,
     },
+  },
+})
+
+local null_ls = require("null-ls")
+local lsp_format_on_save = vim.api.nvim_create_augroup("lsp_format_on_save", { clear = true })
+
+null_ls.setup({
+  sources = {
+    null_ls.builtins.formatting.prettier,
+  },
+  on_attach = function(client, bufnr)
+    if client.supports_method("textDocument/formatting") then
+      vim.keymap.set("n", "<Leader>f", function()
+        vim.lsp.buf.format({ bufnr = vim.api.nvim_get_current_buf() })
+      end, { buffer = bufnr, desc = "[lsp] format" })
+
+      vim.api.nvim_clear_autocmds({ group = lsp_format_on_save, buffer = bufnr })
+
+      vim.api.nvim_create_autocmd("BufWritePre", {
+        buffer = bufnr,
+        group = lsp_format_on_save,
+        callback = function()
+          vim.lsp.buf.format({ bufnr = bufnr, async = true })
+        end,
+        desc = "[lsp] format on save",
+      })
+    end
+
+    if client.supports_method("textDocument/rangeFormatting") then
+      vim.keymap.set("x", "<Leader>f", function()
+        vim.lsp.buf.format({ bufnr = vim.api.nvim_get_current_buf() })
+      end, { buffer = bufnr, desc = "[lsp] format" })
+    end
+  end,
+})
+
+require("lualine").setup({
+  options = {
+    icons_enabled = true,
+    theme = "auto",
+    component_separators = { left = "", right = "" },
+    section_separators = { left = "", right = "" },
+    disabled_filetypes = {
+      statusline = {},
+      winbar = {},
+    },
+    ignore_focus = {},
+    always_divide_middle = true,
+    globalstatus = false,
+    refresh = {
+      statusline = 1000,
+      tabline = 1000,
+      winbar = 1000,
+    },
+  },
+  sections = {
+    lualine_a = {
+      {
+        "mode",
+        icons_enabled = true,
+        show_filename_only = true,
+        hide_filename_extension = false,
+        show_modified_status = true,
+        mode = 2,
+        symbols = {
+          modified = "[+]",
+          alternate_file = "#",
+          directory = "",
+        },
+      },
+    },
+    lualine_b = { "branch", "diff", "diagnostics" },
+    lualine_c = {
+      {
+        "filename",
+        symbols = {
+          readonly = "[🔒]",
+        },
+      },
+    },
+    lualine_x = {
+      "encoding",
+      "fileformat",
+      "filetype",
+      {
+        "diagnostics",
+        sources = { "nvim_diagnostics" },
+        symbols = { error = "🆇 ", warn = "⚠️ ", info = "ℹ️ ", hint = " " },
+      },
+    },
+    lualine_y = { "progress" },
+    lualine_z = { "location" },
+  },
+  inactive_sections = {
+    lualine_a = {},
+    lualine_b = {},
+    lualine_c = { "filename" },
+    lualine_x = { "location" },
+    lualine_y = {},
+    lualine_z = {},
+  },
+  tabline = {},
+  winbar = {},
+  inactive_winbar = {},
+  extensions = {},
+})
+
+local cmp = require("cmp")
+local lspkind = require("lspkind")
+
+cmp.setup({
+  mapping = cmp.mapping.preset.insert({
+    ["<Tab>"] = function(fallback)
+      if cmp.visible() then
+        cmp.select_next_item()
+      else
+        fallback()
+      end
+    end,
+    ["<S-Tab>"] = function(fallback)
+      if cmp.visible() then
+        cmp.select_prev_item()
+      else
+        fallback()
+      end
+    end,
+    ["<CR>"] = cmp.mapping.confirm({ select = true }),
+    ["<C-e>"] = cmp.mapping.abort(),
+    ["<Esc>"] = cmp.mapping.close(),
+    ["<C-d>"] = cmp.mapping.scroll_docs(-4),
+    ["<C-f>"] = cmp.mapping.scroll_docs(4),
+  }),
+  sources = {
+    { name = "nvim_lsp" }, -- For nvim-lsp
+    { name = "ultisnips" }, -- For ultisnips user.
+    { name = "path" }, -- for path completion
+    { name = "buffer", keyword_length = 2 }, -- for buffer word completion
+  },
+  completion = {
+    keyword_length = 1,
+    completeopt = "menu,noselect",
+  },
+  view = {
+    entries = "custom",
+  },
+  formatting = {
+    format = lspkind.cmp_format({
+      mode = "symbol_text",
+      menu = {
+        nvim_lsp = "[LSP]",
+        ultisnips = "[US]",
+        path = "[Path]",
+        buffer = "[Buffer]",
+        emoji = "[Emoji]",
+        omni = "[Omni]",
+      },
+      show_labelDetails = true,
+      maxwidth = 40,
+      ellipsis_char = "...",
+    }),
+    fields = {},
+    expandable_indicator = true,
+  },
+})
+
+local prettier = require("prettier")
+
+prettier.setup({
+  bin = "prettier", -- or `'prettierd'` (v0.23.3+)
+  filetypes = {
+    "css",
+    "graphql",
+    "html",
+    "javascript",
+    "javascriptreact",
+    "json",
+    "less",
+    "markdown",
+    "scss",
+    "typescript",
+    "typescriptreact",
+    "yaml",
+  },
+  cli_options = {
+    arrow_parens = "always",
+    bracket_spacing = true,
+    bracket_same_line = false,
+    embedded_language_formatting = "auto",
+    end_of_line = "lf",
+    html_whitespace_sensitivity = "css",
+    jsx_single_quote = false,
+    print_width = 80,
+    prose_wrap = "preserve",
+    quote_props = "as-needed",
+    semi = true,
+    single_attribute_per_line = false,
+    single_quote = false,
+    tab_width = 2,
+    trailing_comma = "es5",
+    use_tabs = false,
+    vue_indent_script_and_style = false,
   },
 })
