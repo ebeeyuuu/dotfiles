@@ -17,5 +17,5 @@ vim.api.nvim_set_keymap(
   [[:lua vim.cmd('BufferGoto ' .. string.char(vim.fn.getchar()))<CR>]],
   { noremap = true, silent = true }
 )
-vim.api.nvim_set_keymap("n", "BJ", ":BufferNext<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "BL", ":BufferPrevious<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "BL", ":BufferNext<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "BJ", ":BufferPrevious<CR>", { noremap = true, silent = true })
