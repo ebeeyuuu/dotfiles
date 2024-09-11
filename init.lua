@@ -201,7 +201,7 @@ vim.opt.termguicolors = true
 vim.notify = require("notify")
 
 require("notify").setup({
-  stages = "fade_in_slide_out",
+  stages = "fade",
   timeout = 1500,
   background_colour = "#000000",
 })
