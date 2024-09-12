@@ -195,15 +195,3 @@ prettier.setup({
     vue_indent_script_and_style = false,
   },
 })
-
-vim.opt.termguicolors = true
-
-vim.notify = require("notify")
-
-require("notify").setup({
-  stages = "fade",
-  timeout = 1500,
-  background_colour = "#000000",
-})
-
-vim.notify("Welcome back Ean.", vim.log.levels.INFO)
