@@ -72,7 +72,8 @@ null_ls.setup({
         buffer = bufnr,
         group = lsp_format_on_save,
         callback = function()
-          vim.lsp.buf.format({ bufnr = bufnr, async = true })
+          vim.lsp.buf.format({ bufnr = bufnr, async = false }) -- Format buffer
+          vim.cmd("write") -- Write the buffer after formatting
         end,
         desc = "[lsp] format on save",
       })
