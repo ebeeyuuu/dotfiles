@@ -31,6 +31,7 @@ vim.cmd([[
     Plug 'folke/lazydev.nvim'
     Plug 'echasnovski/mini.nvim'
     Plug 'laytan/cloak.nvim'
+    Plug 'mbbill/undotree'
   call plug#end()
 ]])
 
