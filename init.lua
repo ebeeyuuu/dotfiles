@@ -30,6 +30,7 @@ vim.cmd([[
     Plug 'onsails/lspkind.nvim'
     Plug 'folke/lazydev.nvim'
     Plug 'echasnovski/mini.nvim'
+    Plug 'laytan/cloak.nvim'
   call plug#end()
 ]])
 
@@ -194,5 +195,19 @@ prettier.setup({
     trailing_comma = "es5",
     use_tabs = false,
     vue_indent_script_and_style = false,
+  },
+})
+
+require("cloak").setup({
+  enabled = true,
+  cloak_character = "*",
+  highlight_group = "Comment",
+  patterns = {
+    {
+      file_pattern = {
+        ".env*",
+      },
+      cloak_pattern = "=.+",
+    },
   },
 })
