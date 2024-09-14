@@ -19,4 +19,4 @@ vim.api.nvim_set_keymap(
 vim.api.nvim_set_keymap("n", "BL", ":BufferNext<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "BJ", ":BufferPrevious<CR>", { noremap = true, silent = true })
 
-vim.api.nvim_set_keymap("n", "T", ":UndotreeToggle<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
