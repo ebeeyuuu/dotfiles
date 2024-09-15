@@ -222,5 +222,11 @@ lspconfig.tsserver.setup({
   on_attach = function(client, bufnr)
     client.server_capabilities.documentFormattingProvider = false
     client.server_capabilities.diagnosticProvider = false
+    vim.diagnostic.config({
+      severity_sort = true,
+      virtual_text = {
+        severity = { min = vim.diagnosticl.severity.WARN },
+      },
+    })
   end,
 })
