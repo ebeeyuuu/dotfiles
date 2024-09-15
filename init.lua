@@ -37,9 +37,6 @@ vim.cmd([[
 
 vim.cmd("set wrap")
 
-local nvim_lspconfig = require("lspconfig")
-nvim_lspconfig.pyright.setup({})
-
 require("telescope").setup({
   defaults = {
     sorting_strategy = "ascending", -- You can choose "ascending" or "descending"
@@ -211,4 +208,19 @@ require("cloak").setup({
       cloak_pattern = "=.+",
     },
   },
+})
+
+local lspconfig = require("lspconfig")
+
+vim.diagnostic.config({
+  virtual_Text = false,
+  signs = false,
+  update_in_insert = false,
+})
+
+lspconfig.tsserver.setup({
+  on_attach = function(client, bufnr)
+    client.server_capabilities.documentFormattingProvider = false
+    client.server_capabilities.diagnosticProvider = false
+  end,
 })
