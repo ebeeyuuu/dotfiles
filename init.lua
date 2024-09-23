@@ -235,13 +235,13 @@ lspconfig.tsserver.setup({
 
 require("supermaven-nvim").setup({
 	keymaps = {
-		accept_suggestion = "<Tab>",
+		accept_suggestion = "jk",
 		clear_suggestion = "<C-]>",
 		accept_word = "<C-j>",
 	},
 	ignore_filetypes = { cpp = true }, -- or { "cpp", }
 	color = {
-		suggestion_color = "#ffffff",
+		suggestion_color = "#64787f",
 		cterm = 244,
 	},
 	log_level = "info", -- set to "off" to disable logging completely
