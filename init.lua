@@ -34,6 +34,7 @@ vim.cmd([[
     Plug 'mbbill/undotree'
     Plug 'David-Kunz/gen.nvim'
     Plug 'supermaven-inc/supermaven-nvim'
+    Plug 'edluffy/hologram.nvim'
   call plug#end()
 ]])
 
@@ -86,77 +87,6 @@ null_ls.setup({
 			end, { buffer = bufnr, desc = "[lsp] format" })
 		end
 	end,
-})
-
-require("lualine").setup({
-	options = {
-		icons_enabled = true,
-		theme = "auto",
-		component_separators = { left = "", right = "" },
-		section_separators = { left = "", right = "" },
-		disabled_filetypes = {
-			statusline = {},
-			winbar = {},
-		},
-		ignore_focus = {},
-		always_divide_middle = true,
-		globalstatus = false,
-		refresh = {
-			statusline = 1000,
-			tabline = 1000,
-			winbar = 1000,
-		},
-	},
-	sections = {
-		lualine_a = {
-			{
-				"mode",
-				icons_enabled = true,
-				show_filename_only = true,
-				hide_filename_extension = false,
-				show_modified_status = true,
-				mode = 2,
-				symbols = {
-					modified = "[+]",
-					alternate_file = "#",
-					directory = "",
-				},
-			},
-		},
-		lualine_b = { "branch", "diff", "diagnostics" },
-		lualine_c = {
-			{
-				"filename",
-				symbols = {
-					readonly = "[🔒]",
-				},
-			},
-		},
-		lualine_x = {
-			"encoding",
-			"fileformat",
-			"filetype",
-			{
-				"diagnostics",
-				sources = { "nvim_diagnostics" },
-				symbols = { error = "🆇 ", warn = "⚠️ ", info = "ℹ️ ", hint = " " },
-			},
-		},
-		lualine_y = { "progress" },
-		lualine_z = { "location" },
-	},
-	inactive_sections = {
-		lualine_a = {},
-		lualine_b = {},
-		lualine_c = { "filename" },
-		lualine_x = { "location" },
-		lualine_y = {},
-		lualine_z = {},
-	},
-	tabline = {},
-	winbar = {},
-	inactive_winbar = {},
-	extensions = {},
 })
 
 local prettier = require("prettier")
@@ -250,4 +180,8 @@ require("supermaven-nvim").setup({
 	condition = function()
 		return false
 	end, -- condition to check for stopping supermaven, `true` means to stop supermaven when the condition is true.
+})
+
+require("hologram").setup({
+	auto_display = true,
 })
