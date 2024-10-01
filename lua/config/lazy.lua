@@ -1,58 +1,58 @@
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
-  local lazyrepo = "https://github.com/folke/lazy.nvim.git"
-  local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
-  if vim.v.shell_error ~= 0 then
-    vim.api.nvim_echo({
-      { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
-      { out, "WarningMsg" },
-      { "\nPress any key to exit..." },
-    }, true, {})
-    vim.fn.getchar()
-    os.exit(1)
-  end
+	local lazyrepo = "https://github.com/folke/lazy.nvim.git"
+	local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
+	if vim.v.shell_error ~= 0 then
+		vim.api.nvim_echo({
+			{ "Failed to clone lazy.nvim:\n", "ErrorMsg" },
+			{ out, "WarningMsg" },
+			{ "\nPress any key to exit..." },
+		}, true, {})
+		vim.fn.getchar()
+		os.exit(1)
+	end
 end
 
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-  spec = {
-    { "LazyVim/LazyVim", import = "lazyvim.plugins", opts = {
-      colorscheme = "solarized-osaka",
-    } },
-    { import = "plugins" },
-    { "nvim-neo-tree/neo-tree.nvim", enabled = false },
-  },
-  defaults = {
-    lazy = false,
-    version = false, -- always use the latest git commit
-  },
-  install = { colorscheme = { "tokyonight", "habamax" } },
-  checker = {
-    enabled = true, -- check for plugin updates periodically
-    notify = false, -- notify on update
-  },
-  performance = {
-    rtp = {
-      disabled_plugins = {
-        "gzip",
-        "tarPlugin",
-        "tohtml",
-        "tutor",
-        "zipPlugin",
-        "neo-tree", -- This disables the neo-tree plugin
-      },
-    },
-  },
+	spec = {
+		{ "LazyVim/LazyVim", import = "lazyvim.plugins", opts = {
+			colorscheme = "solarized-osaka",
+		} },
+		{ import = "plugins" },
+		{ "nvim-neo-tree/neo-tree.nvim", enabled = false },
+	},
+	defaults = {
+		lazy = false,
+		version = false, -- always use the latest git commit
+	},
+	install = { colorscheme = { "tokyonight", "habamax" } },
+	checker = {
+		enabled = true, -- check for plugin updates periodically
+		notify = false, -- notify on update
+	},
+	performance = {
+		rtp = {
+			disabled_plugins = {
+				"gzip",
+				"tarPlugin",
+				"tohtml",
+				"tutor",
+				"zipPlugin",
+				"neo-tree", -- This disables the neo-tree plugin
+			},
+		},
+	},
 })
 
 vim.api.nvim_set_keymap("n", "BC", ":BufferClose<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap(
-  "n",
-  "BC",
-  [[:lua vim.cmd('BufferGoto ' .. string.char(vim.fn.getchar()))<CR>]],
-  { noremap = true, silent = true }
+	"n",
+	"BC",
+	[[:lua vim.cmd('BufferGoto ' .. string.char(vim.fn.getchar()))<CR>]],
+	{ noremap = true, silent = true }
 )
 vim.api.nvim_set_keymap("n", "BN", ":BufferNext<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "BP", ":BufferPrevious<CR>", { noremap = true, silent = true })

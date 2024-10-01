@@ -34,7 +34,6 @@ vim.cmd([[
     Plug 'mbbill/undotree'
     Plug 'David-Kunz/gen.nvim'
     Plug 'supermaven-inc/supermaven-nvim'
-    Plug 'edluffy/hologram.nvim'
   call plug#end()
 ]])
 
@@ -180,8 +179,4 @@ require("supermaven-nvim").setup({
 	condition = function()
 		return false
 	end, -- condition to check for stopping supermaven, `true` means to stop supermaven when the condition is true.
-})
-
-require("hologram").setup({
-	auto_display = true,
 })
