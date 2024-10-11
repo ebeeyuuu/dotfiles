@@ -7,12 +7,12 @@
         {
           "background": "#29eede",
           "foreground": "#011627",
-          "leading_diamond": "\u256d\u2500\ue0b6",
           "properties": {
             "windows": "\ue62a"
           },
           "style": "diamond",
           "template": " {{ if .WSL }}WSL at {{ end }}{{.Icon}}  ",
+          "leading_diamond": "<transparent,#29eede>\ue0b0</>",
           "trailing_diamond": "\ue0b0",
           "type": "os"
         },
@@ -39,7 +39,7 @@
           "type": "path"
         },
         {
-          "background": "#d6ffac",
+          "background": "#ffc101",
           "background_templates": [
             "{{ if or (.Working.Changed) (.Staging.Changed) }}#ffe999{{ end }}",
             "{{ if and (gt .Ahead 0) (gt .Behind 0) }}#f78c6c{{ end }}",
@@ -351,43 +351,6 @@
           "template": "\ue641 {{ .CurrentDate | date .Format }}",
           "trailing_diamond": "\ue0b4",
           "type": "time"
-        }
-      ],
-      "type": "prompt"
-    },
-    {
-      "alignment": "left",
-      "newline": true,
-      "segments": [
-        {
-          "foreground": "#29eede",
-          "style": "plain",
-          "template": "\u2570\u2500",
-          "type": "text"
-        },
-        {
-          "background": "#ffc101",
-          "foreground": "#011627",
-          "leading_diamond": "\ue0b6",
-          "properties": {
-            "playing_icon": "\uf1bc "
-          },
-          "style": "diamond",
-          "template": " {{ .Icon }}{{ if ne .Status \"stopped\" }}{{ .Artist }} ~ {{ .Track }}{{ end }} ",
-          "trailing_diamond": "\ue0b0 ",
-          "type": "spotify"
-        },
-        {
-          "foreground": "#ffe999",
-          "foreground_templates": [
-            "{{ if gt .Code 0 }}#ef5350{{ end }}"
-          ],
-          "properties": {
-            "always_enabled": true
-          },
-          "style": "plain",
-          "template": "\ue285\ue285",
-          "type": "status"
         }
       ],
       "type": "prompt"
