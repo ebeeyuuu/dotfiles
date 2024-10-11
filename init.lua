@@ -5,6 +5,8 @@ require("config.keymaps")
 require("config.options")
 require("config.lazy")
 
+require("ebeeyuuuu")
+
 vim.cmd([[
   call plug#begin('~/.local/share/nvim/plugged/')
     Plug 'neovim/nvim-lspconfig'
