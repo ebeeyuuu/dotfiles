@@ -5,14 +5,14 @@
       "alignment": "left",
       "segments": [
         {
-          "background": "#29eede",
+          "background": "#ffe999",
           "foreground": "#011627",
           "properties": {
             "windows": "\ue62a"
           },
           "style": "diamond",
           "template": " {{ if .WSL }}WSL at {{ end }}{{.Icon}}  ",
-          "leading_diamond": "<transparent,#29eede>\ue0b0</>",
+          "leading_diamond": "<transparent,#ffe999>\ue0b0</>",
           "trailing_diamond": "\ue0b0",
           "type": "os"
         },
@@ -25,7 +25,7 @@
           "type": "root"
         },
         {
-          "background": "#49aef5",
+          "background": "#ffc101",
           "foreground": "#011627",
           "powerline_symbol": "\ue0b0",
           "properties": {
@@ -39,7 +39,7 @@
           "type": "path"
         },
         {
-          "background": "#ffc101",
+          "background": "#49aef5",
           "background_templates": [
             "{{ if or (.Working.Changed) (.Staging.Changed) }}#ffe999{{ end }}",
             "{{ if and (gt .Ahead 0) (gt .Behind 0) }}#f78c6c{{ end }}",
