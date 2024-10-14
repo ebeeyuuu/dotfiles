@@ -31,6 +31,7 @@ vim.cmd([[
     Plug 'onsails/lspkind.nvim'
     Plug 'folke/lazydev.nvim'
     Plug 'echasnovski/mini.nvim'
+    Plug 'laytan/cloak.nvim'
     Plug 'mbbill/undotree'
     Plug 'David-Kunz/gen.nvim'
     Plug 'supermaven-inc/supermaven-nvim'
