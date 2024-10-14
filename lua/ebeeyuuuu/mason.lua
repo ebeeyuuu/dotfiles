@@ -29,5 +29,4 @@ require("mason").setup({
 		upgrade_pip = true,
 		install_args = {},
 	},
-	max_concurrent_installers = 5,
 })
