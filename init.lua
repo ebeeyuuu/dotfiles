@@ -19,7 +19,6 @@ vim.cmd([[
     Plug 'hrsh7th/cmp-path'
     Plug 'hrsh7th/cmp-cmdline'
     Plug 'hrsh7th/nvim-cmp'
-    Plug 'phaazon/hop.nvim'
     Plug 'williamboman/mason.nvim'
     Plug 'williamboman/mason-lspconfig.nvim'
     Plug 'mfussenegger/nvim-lint'
@@ -35,16 +34,7 @@ vim.cmd([[
     Plug 'mbbill/undotree'
     Plug 'David-Kunz/gen.nvim'
     Plug 'supermaven-inc/supermaven-nvim'
-    Plug 'norcalli/nvim-colorizer.lua'
   call plug#end()
 ]])
 
 vim.cmd("set wrap")
-
-vim.diagnostic.config({
-	virtual_text = false,
-	signs = false,
-	update_in_insert = false,
-})
-
-require("colorizer").setup()

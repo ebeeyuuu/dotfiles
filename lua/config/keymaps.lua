@@ -1,7 +1,3 @@
--- Keymaps are automatically loaded on the VeryLazy event
--- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
--- Add any additional keymaps here
-
 vim.api.nvim_set_keymap("n", "yy", "1GvG$y", { noremap = true, silent = true })
 
 -- Telescope keymaps
@@ -11,12 +7,11 @@ vim.api.nvim_set_keymap("n", "<Space>e", ":Telescope file_browser<cr>", { norema
 -- Buffer keymaps
 vim.api.nvim_set_keymap("n", "BB", ":BufferClose<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap(
-  "n",
-  "B",
-  [[:lua vim.cmd('BufferGoto ' .. string.char(vim.fn.getchar()))<CR>]],
-  { noremap = true, silent = true }
+	"n",
+	"B",
+	[[:lua vim.cmd('BufferGoto ' .. string.char(vim.fn.getchar()))<CR>]],
+	{ noremap = true, silent = true }
 )
 vim.api.nvim_set_keymap("n", "BL", ":BufferNext<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "BJ", ":BufferPrevious<CR>", { noremap = true, silent = true })
-
-vim.keymap.set("n", "<leader>u", vim.cmd.UndotreeToggle)
+vim.api.nvim_set_keymap("n", "BR", ":BufferRestore<CR>", { noremap = true, silent = true })
