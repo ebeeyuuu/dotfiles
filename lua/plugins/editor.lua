@@ -66,22 +66,21 @@ return {
 				desc = "Find Plugin File",
 			},
 			{
-				";f",
-				function()
-					local builtin = require("telescope.builtin")
-					builtin.find_files({
-						no_ignore = false,
-						hidden = true,
-					})
-				end,
-				desc = "Lists files in your current working directory, respects .gitignore",
-			},
-			{
 				";r",
 				function()
 					local builtin = require("telescope.builtin")
 					builtin.live_grep({
+						prompt_title = "File Browser",
 						additional_args = { "--hidden" },
+						previewer = true,
+						layout_config = {
+							height = 0.8,
+							width = 0.95,
+							prompt_position = "top",
+							preview_cutoff = 0,
+							preview_width = 0.65,
+						},
+						sorting_strategy = "ascending",
 					})
 				end,
 				desc = "Search for a string in your current working directory and get results live as you type, respects .gitignore",
@@ -122,31 +121,38 @@ return {
 				";s",
 				function()
 					local builtin = require("telescope.builtin")
-					builtin.treesitter()
+					builtin.treesitter({
+						prompt_title = "Treesitter Symbols",
+						layout_config = {
+							height = 0.8,
+							width = 0.95,
+							prompt_position = "top",
+						},
+						sorting_strategy = "ascending",
+					})
 				end,
 				desc = "Lists Function names, variables, from Treesitter",
 			},
 			{
 				"sf",
 				function()
-					local telescope = require("telescope")
-
-					local function telescope_buffer_dir()
-						return vim.fn.expand("%:p:h")
-					end
-
-					telescope.extensions.file_browser.file_browser({
-						path = "%:p:h",
-						cwd = telescope_buffer_dir(),
-						respect_gitignore = false,
+					local builtin = require("telescope.builtin")
+					builtin.find_files({
+						prompt_title = "File Browser",
+						previewer = true,
+						layout_config = {
+							height = 0.8,
+							width = 0.95,
+							prompt_position = "top",
+							preview_cutoff = 0,
+							preview_width = 0.65,
+						},
+						sorting_strategy = "ascending",
+						no_ignore = false,
 						hidden = true,
-						grouped = true,
-						previewer = false,
-						initial_mode = "normal",
-						layout_config = { height = 40 },
 					})
 				end,
-				desc = "Open File Browser with the path of the current buffer",
+				desc = "Open File Browser with the path of the current buffer and show preview",
 			},
 		},
 		config = function(_, opts)

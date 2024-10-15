@@ -31,7 +31,7 @@ return {
 	{
 		"williamboman/mason-lspconfig.nvim",
 		opts = function(_, opts)
-			opts.ensure_installed = { "tsserver", "lua_ls", "jsonls" }
+			opts.ensure_installed = { "lua_ls", "jsonls" }
 		end,
 	},
 }
