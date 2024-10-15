@@ -1,7 +1,6 @@
 require("ebeeyuuuu.lsp")
 require("ebeeyuuuu.prettier")
 require("ebeeyuuuu.supermaven")
-require("ebeeyuuuu.telescope")
 require("ebeeyuuuu.cloak")
 require("ebeeyuuuu.undotree")
 require("ebeeyuuuu.colorizer")

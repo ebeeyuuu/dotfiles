@@ -37,3 +37,4 @@ vim.cmd([[
 ]])
 
 vim.cmd("set wrap")
+vim.cmd(":Telescope file_browser")
