@@ -76,4 +76,41 @@ return {
 			vim.api.nvim_set_keymap("n", "<leader>tm", ":TabbyMoveTab<CR>", { noremap = true, silent = true }) -- Move Tab
 		end,
 	},
+	{
+		"echasnovski/mini.animate",
+		event = "VeryLazy",
+		opts = function(_, opts)
+			opts.scroll = {
+				enable = false,
+			}
+		end,
+	},
+	{
+		"folke/zen-mode.nvim",
+		cmd = "ZenMode",
+		opts = {
+			plugins = {
+				gitsigns = true,
+				tmux = true,
+				kitty = { enabled = false, font = "+2" },
+			},
+		},
+		keys = { { "<leader>z", "<cmd>ZenMode<CR>", desc = "Zen Mode" } },
+	},
+	{
+		"akinsho/bufferline.nvim",
+		event = "VeryLazy",
+		keys = {
+			{ "<Tab>", "<cmd>BufferLineCycleNext<CR>", desc = "Next tab" },
+			{ "<S-Tab>", "<cmd>BufferLineCyclePrev<CR>", desc = "Prev tab" },
+		},
+		opts = {
+			options = {
+				mode = "tabs",
+				separator_style = "slant",
+				show_buffer_close_icons = false,
+				show_close_icon = false,
+			},
+		},
+	},
 }

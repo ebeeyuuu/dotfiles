@@ -45,8 +45,8 @@
           "background_templates": [
             "{{ if or (.Working.Changed) (.Staging.Changed) }}#ff9468{{ end }}",
             "{{ if and (gt .Ahead 0) (gt .Behind 0) }}#ffac99{{ end }}",
-            "{{ if gt .Ahead 0 }}#99afff{{ end }}",
-            "{{ if gt .Behind 0 }}#99afff{{ end }}"
+            "{{ if gt .Ahead 0 }}#ffac99{{ end }}",
+            "{{ if gt .Behind 0 }}#ffac99{{ end }}"
           ],
           "foreground": "#011627",
           "powerline_symbol": "\ue0b0",
