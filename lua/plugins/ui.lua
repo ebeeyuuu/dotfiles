@@ -113,4 +113,52 @@ return {
 			},
 		},
 	},
+	{
+		"rcarriga/nvim-notify",
+		config = function()
+			-- Configure nvim-notify
+			local notify = require("notify")
+			notify.setup({
+				stages = "fade_in_slide_out", -- Set the notification animation
+				timeout = 3000, -- Set a default timeout for notifications (3 seconds)
+				max_width = 50, -- Set max width for notifications
+				max_height = 10, -- Set max height for notifications
+				background_colour = "#000000", -- Set background color (optional)
+				icons = {
+					ERROR = "", -- Customize error icon
+					WARN = "", -- Customize warn icon
+					INFO = "", -- Customize info icon
+					DEBUG = "", -- Customize debug icon
+					TRACE = "✎", -- Customize trace icon
+				},
+			})
+
+			-- Key mappings for notifications
+			vim.api.nvim_set_keymap(
+				"n",
+				"<leader>tn",
+				":lua require('notify')('This is a test notification!')<CR>",
+				{ noremap = true, silent = true, desc = "Test Notification" }
+			)
+			vim.api.nvim_set_keymap(
+				"n",
+				"<leader>tw",
+				":lua require('notify')('This is a warning!', 'warn')<CR>",
+				{ noremap = true, silent = true, desc = "Warning Notification" }
+			)
+			vim.api.nvim_set_keymap(
+				"n",
+				"<leader>te",
+				":lua require('notify')('This is an error!', 'error')<CR>",
+				{ noremap = true, silent = true, desc = "Error Notification" }
+			)
+			vim.api.nvim_set_keymap(
+				"n",
+				"<leader>ti",
+				":lua require('notify')('This is an info message!', 'info')<CR>",
+				{ noremap = true, silent = true, desc = "Info Notification" }
+			)
+		end,
+		desc = "Notification system with fade in and slide out animation",
+	},
 }
