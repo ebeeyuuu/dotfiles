@@ -1,11 +1,14 @@
 require("plugins.colorscheme")
 require("plugins.editor")
+require("plugins.mason")
+require("plugins.lsp")
+require("plugins.prettier")
+require("plugins.supermaven")
+require("plugins.typescripttools")
 
 require("config.keymaps")
 require("config.options")
 require("config.lazy")
-
-require("ebeeyuuuu")
 
 vim.cmd([[
   call plug#begin('~/.local/share/nvim/plugged/')
@@ -33,8 +36,11 @@ vim.cmd([[
     Plug 'mbbill/undotree'
     Plug 'David-Kunz/gen.nvim'
     Plug 'supermaven-inc/supermaven-nvim'
+    Plug 'nanozuki/tabby.nvim'
   call plug#end()
 ]])
 
+require("telescope").setup({})
+require("tabby").setup({})
+
 vim.cmd("set wrap")
-vim.cmd(":Telescope file_browser")
