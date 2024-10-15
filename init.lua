@@ -22,7 +22,6 @@ vim.cmd([[
     Plug 'williamboman/mason.nvim'
     Plug 'williamboman/mason-lspconfig.nvim'
     Plug 'mfussenegger/nvim-lint'
-    Plug 'pmizio/typescript-tools.nvim'
     Plug 'nvim-lua/plenary.nvim'
     Plug 'nvim-lualine/lualine.nvim'
     Plug 'romgrk/barbar.nvim'
