@@ -140,19 +140,20 @@ return {
 					builtin.find_files({
 						prompt_title = "File Browser",
 						previewer = true,
+						cwd = vim.fn.expand("%:p:h"), -- Set cwd to the current buffer's directory
 						layout_config = {
 							height = 0.8,
 							width = 0.95,
 							prompt_position = "top",
 							preview_cutoff = 0,
-							preview_width = 0.65,
+							preview_width = 0.60,
 						},
 						sorting_strategy = "ascending",
 						no_ignore = false,
 						hidden = true,
 					})
 				end,
-				desc = "Open File Browser with the path of the current buffer and show preview",
+				desc = "Open File Browser in the current buffer's directory and show preview",
 			},
 		},
 		config = function(_, opts)
