@@ -9,8 +9,8 @@ vim.api.nvim_set_keymap("n", "<Space>e", "", {
 		local telescope = require("telescope")
 
 		telescope.extensions.file_browser.file_browser({
-			path = "/",
-			cwd = "/",
+			path = vim.fn.getcwd(),
+			cwd = vim.fn.getcwd(),
 			respect_gitignore = false,
 			hidden = true,
 			grouped = true,

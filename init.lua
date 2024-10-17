@@ -37,10 +37,29 @@ vim.cmd([[
     Plug 'David-Kunz/gen.nvim'
     Plug 'supermaven-inc/supermaven-nvim'
     Plug 'nanozuki/tabby.nvim'
+    Plug 'nvim-telescope/telescope.nvim'
+    Plug 'nvim-telescope/telescope-file-browser.nvim'
   call plug#end()
 ]])
 
-require("telescope").setup({})
+require("telescope").setup({
+	extensions = {
+		file_browser = {
+			hidden = true,
+			grouped = true,
+			previewer = true,
+			initial_mode = "normal",
+			layout_strategy = "horizontal",
+			layout_config = {
+				height = 0.8,
+				width = 0.95,
+				preview_width = 0.6,
+			},
+		},
+	},
+})
+
+require("telescope").load_extension("file_browser")
 require("tabby").setup({})
 
 vim.cmd("set wrap")
