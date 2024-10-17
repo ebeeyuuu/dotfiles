@@ -48,7 +48,7 @@ require("telescope").setup({
 			hidden = true,
 			grouped = true,
 			previewer = true,
-			initial_mode = "normal",
+			initial_mode = "insert",
 			layout_strategy = "horizontal",
 			layout_config = {
 				height = 0.8,
@@ -60,6 +60,36 @@ require("telescope").setup({
 })
 
 require("telescope").load_extension("file_browser")
-require("tabby").setup({})
+require("tabby").setup({
+	opt = {
+		show_at_least = 1,
+		show_close_icon = true,
+		tab_size = 20,
+		max_tab_size = 100,
+		max_tab_width = 100,
+		min_tab_width = 20,
+		tab_min_width = 20,
+		tab_max_width = 100,
+		switch_buffer = true,
+		ignore_hidden = true,
+		hide_numbers = true,
+		persist_buffers = true,
+		exclusive = true,
+		close_on_exit = true,
+		auto_close = true,
+		number_selected = true,
+		sort_by = "name",
+		mappings = {
+			["<C-h>"] = "navigate_left",
+			["<C-l>"] = "navigate_right",
+			["<C-q>"] = "close_tab",
+			["<C-t>"] = "new_tab",
+			["<C-w>"] = "cycle",
+			["<C-x>"] = "close_other_tabs",
+			["<C-Tab>"] = "cycle",
+			["<C-S-Tab>"] = "cycle_reverse",
+		},
+	},
+})
 
 vim.cmd("set wrap")

@@ -15,7 +15,7 @@ vim.api.nvim_set_keymap("n", "<Space>e", "", {
 			hidden = true,
 			grouped = true,
 			previewer = true,
-			initial_mode = "normal",
+			initial_mode = "insert",
 			layout_strategy = "horizontal",
 			layout_config = {
 				height = 0.8,
