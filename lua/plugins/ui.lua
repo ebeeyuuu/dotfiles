@@ -17,6 +17,29 @@ return {
 		end,
 	},
 	{
+		"akinsho/bufferline.nvim",
+		dependencies = "nvim-tree/nvim-web-devicons",
+		config = function()
+			require("bufferline").setup({
+				options = {
+					mode = "buffers",
+					numbers = "none",
+					close_command = "bdelete! %d",
+					right_mouse_command = "bdelete! %d",
+					left_mouse_command = "buffer %d",
+					middle_mouse_command = nil,
+					buffer_close_icon = "",
+					modified_icon = "●",
+					close_icon = "",
+					left_trunc_marker = "",
+					right_trunc_marker = "",
+					separator_style = "slant",
+					always_show_bufferline = true,
+				},
+			})
+		end,
+	},
+	{
 		"folke/noice.nvim",
 		opts = function(_, opts)
 			table.insert(opts.routes, {
@@ -65,15 +88,6 @@ return {
 			})
 
 			opts.presets.lsp_doc_border = true
-		end,
-	},
-	{
-		"nanozuki/tabby.nvim",
-		config = function()
-			require("tabby").setup()
-			vim.api.nvim_set_keymap("n", "<leader>tn", ":TabbyNewTab<CR>", { noremap = true, silent = true }) -- New Tab
-			vim.api.nvim_set_keymap("n", "<leader>tc", ":TabbyCloseTab<CR>", { noremap = true, silent = true }) -- Close Tab
-			vim.api.nvim_set_keymap("n", "<leader>tm", ":TabbyMoveTab<CR>", { noremap = true, silent = true }) -- Move Tab
 		end,
 	},
 	{
@@ -132,32 +146,6 @@ return {
 					TRACE = "✎", -- Customize trace icon
 				},
 			})
-
-			-- Key mappings for notifications
-			vim.api.nvim_set_keymap(
-				"n",
-				"<leader>tn",
-				":lua require('notify')('This is a test notification!')<CR>",
-				{ noremap = true, silent = true, desc = "Test Notification" }
-			)
-			vim.api.nvim_set_keymap(
-				"n",
-				"<leader>tw",
-				":lua require('notify')('This is a warning!', 'warn')<CR>",
-				{ noremap = true, silent = true, desc = "Warning Notification" }
-			)
-			vim.api.nvim_set_keymap(
-				"n",
-				"<leader>te",
-				":lua require('notify')('This is an error!', 'error')<CR>",
-				{ noremap = true, silent = true, desc = "Error Notification" }
-			)
-			vim.api.nvim_set_keymap(
-				"n",
-				"<leader>ti",
-				":lua require('notify')('This is an info message!', 'info')<CR>",
-				{ noremap = true, silent = true, desc = "Info Notification" }
-			)
 		end,
 		desc = "Notification system with fade in and slide out animation",
 	},

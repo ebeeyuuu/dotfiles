@@ -1,4 +1,6 @@
 require("plugins.colorscheme")
+require("plugins.ui")
+require("plugins.cloak")
 require("plugins.editor")
 require("plugins.mason")
 require("plugins.lsp")
@@ -42,12 +44,32 @@ vim.cmd([[
   call plug#end()
 ]])
 
+vim.cmd([[
+  hi Normal guibg=NONE ctermbg=NONE
+  hi TelescopeNormal guibg=NONE ctermbg=NONE
+  hi TelescopeBorder guibg=NONE ctermbg=NONE
+  hi TelescopePromptNormal guibg=NONE ctermbg=NONE
+  hi TelescopePromptBorder guibg=NONE ctermbg=NONE
+  hi TelescopeResultsNormal guibg=NONE ctermbg=NONE
+  hi TelescopeResultsBorder guibg=NONE ctermbg=NONE
+  hi TelescopePreviewNormal guibg=NONE ctermbg=NONE
+  hi TelescopePreviewBorder guibg=NONE ctermbg=NONE
+]])
+
 require("telescope").setup({
+	defaults = {
+		file_ignore_patterns = { "node_modules", "package.json" },
+		prompt_prefix = " ",
+		selection_caret = " ",
+		path_display = { "smart" },
+	},
 	extensions = {
 		file_browser = {
 			hidden = true,
 			grouped = true,
 			previewer = true,
+			hijack_netrw = true,
+			display_stat = false,
 			initial_mode = "insert",
 			layout_strategy = "horizontal",
 			layout_config = {
@@ -58,38 +80,5 @@ require("telescope").setup({
 		},
 	},
 })
-
 require("telescope").load_extension("file_browser")
-require("tabby").setup({
-	opt = {
-		show_at_least = 1,
-		show_close_icon = true,
-		tab_size = 20,
-		max_tab_size = 100,
-		max_tab_width = 100,
-		min_tab_width = 20,
-		tab_min_width = 20,
-		tab_max_width = 100,
-		switch_buffer = true,
-		ignore_hidden = true,
-		hide_numbers = true,
-		persist_buffers = true,
-		exclusive = true,
-		close_on_exit = true,
-		auto_close = true,
-		number_selected = true,
-		sort_by = "name",
-		mappings = {
-			["<C-h>"] = "navigate_left",
-			["<C-l>"] = "navigate_right",
-			["<C-q>"] = "close_tab",
-			["<C-t>"] = "new_tab",
-			["<C-w>"] = "cycle",
-			["<C-x>"] = "close_other_tabs",
-			["<C-Tab>"] = "cycle",
-			["<C-S-Tab>"] = "cycle_reverse",
-		},
-	},
-})
-
 vim.cmd("set wrap")

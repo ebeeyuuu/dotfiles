@@ -2,35 +2,12 @@ return {
 	{
 		enabled = false,
 		"folke/flash.nvim",
-		---@type Flash.Config
 		opts = {
 			search = {
 				forward = true,
 				multi_window = false,
 				wrap = false,
 				incremental = true,
-			},
-		},
-	},
-
-	{
-		"echasnovski/mini.hipatterns",
-		event = "BufReadPre",
-		opts = {
-			highlighters = {
-				hsl_color = {
-					pattern = "hsl%(%d+,? %d+%%?,? %d+%%?%)",
-					group = function(_, match)
-						local utils = require("solarized-osaka.hsl")
-						--- @type string, string, string
-						local nh, ns, nl = match:match("hsl%((%d+),? (%d+)%%?,? (%d+)%%?%)")
-						--- @type number?, number?, number?
-						local h, s, l = tonumber(nh), tonumber(ns), tonumber(nl)
-						--- @type string
-						local hex_color = utils.hslToHex(h, s, l)
-						return MiniHipatterns.compute_hex_color_group(hex_color, "bg")
-					end,
-				},
 			},
 		},
 	},
@@ -76,7 +53,6 @@ return {
 						layout_config = {
 							height = 0.8,
 							width = 0.95,
-							prompt_position = "top",
 							preview_cutoff = 0,
 							preview_width = 0.65,
 						},
@@ -126,7 +102,6 @@ return {
 						layout_config = {
 							height = 0.8,
 							width = 0.95,
-							prompt_position = "top",
 						},
 						sorting_strategy = "ascending",
 					})
@@ -136,21 +111,16 @@ return {
 			{
 				"sf",
 				function()
-					local telescope = require("telescope")
-
-					local function telescope_buffer_dir()
-						return vim.fn.expand("%:p:h")
-					end
-
-					telescope.extensions.file_browser.file_browser({
+					require("telescope").extensions.file_browser.file_browser({
 						path = "%:p:h",
-						cwd = telescope_buffer_dir(),
-						respect_gitignore = false,
+						cwd = vim.fn.expand("%:p:h"),
 						hidden = true,
 						grouped = true,
 						previewer = true,
+						hijack_netrw = true,
 						initial_mode = "insert",
 						layout_strategy = "horizontal",
+						prompt_position = "bottom",
 						layout_config = {
 							height = 0.8,
 							width = 0.95,
@@ -163,17 +133,24 @@ return {
 		},
 		config = function(_, opts)
 			local telescope = require("telescope")
-			local actions = require("telescope.actions")
 			local fb_actions = require("telescope").extensions.file_browser.actions
 
 			opts.defaults = vim.tbl_deep_extend("force", opts.defaults, {
 				wrap_results = true,
 				layout_strategy = "horizontal",
-				layout_config = { prompt_position = "top" },
+				layout_config = { prompt_position = "bottom" },
 				sorting_strategy = "ascending",
-				winblend = 0,
+				file_ignore_patterns = { "node_modules", "package.json" },
+				prompt_prefix = " ",
+				selection_caret = " ",
+				path_display = { "smart" },
 				mappings = {
 					n = {},
+				},
+				winhighlight = {
+					Normal = "Normal",
+					Search = "None",
+					TelescopeMatching = "None",
 				},
 			})
 			opts.pickers = {
@@ -187,9 +164,19 @@ return {
 			}
 			opts.extensions = {
 				file_browser = {
-					theme = "dropdown",
-					hijack_netrw = true,
+					hidden = true,
+					grouped = true,
+					previewer = true,
 					display_stat = false,
+					hijack_netrw = true,
+					initial_mode = "insert",
+					layout_strategy = "horizontal",
+					winblend = 0,
+					layout_config = {
+						height = 0.8,
+						width = 0.95,
+						preview_width = 0.6,
+					},
 					mappings = {
 						["n"] = {
 							["N"] = fb_actions.create,
@@ -197,24 +184,11 @@ return {
 							["/"] = function()
 								vim.cmd("startinsert")
 							end,
-							["<C-u>"] = function(prompt_bufnr)
-								for i = 1, 10 do
-									actions.move_selection_previous(prompt_bufnr)
-								end
-							end,
-							["<C-d>"] = function(prompt_bufnr)
-								for i = 1, 10 do
-									actions.move_selection_next(prompt_bufnr)
-								end
-							end,
-							["<PageUp>"] = actions.preview_scrolling_up,
-							["<PageDown>"] = actions.preview_scrolling_down,
 						},
 					},
 				},
 			}
 			telescope.setup(opts)
-			require("telescope").load_extension("fzf")
 			require("telescope").load_extension("file_browser")
 		end,
 	},
