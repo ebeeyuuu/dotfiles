@@ -17,29 +17,6 @@ return {
 		end,
 	},
 	{
-		"akinsho/bufferline.nvim",
-		dependencies = "nvim-tree/nvim-web-devicons",
-		config = function()
-			require("bufferline").setup({
-				options = {
-					mode = "buffers",
-					numbers = "none",
-					close_command = "bdelete! %d",
-					right_mouse_command = "bdelete! %d",
-					left_mouse_command = "buffer %d",
-					middle_mouse_command = nil,
-					buffer_close_icon = "",
-					modified_icon = "●",
-					close_icon = "",
-					left_trunc_marker = "",
-					right_trunc_marker = "",
-					separator_style = "slant",
-					always_show_bufferline = true,
-				},
-			})
-		end,
-	},
-	{
 		"folke/noice.nvim",
 		opts = function(_, opts)
 			table.insert(opts.routes, {
@@ -112,22 +89,6 @@ return {
 		keys = { { "<leader>z", "<cmd>ZenMode<CR>", desc = "Zen Mode" } },
 	},
 	{
-		"akinsho/bufferline.nvim",
-		event = "VeryLazy",
-		keys = {
-			{ "<Tab>", "<cmd>BufferLineCycleNext<CR>", desc = "Next tab" },
-			{ "<S-Tab>", "<cmd>BufferLineCyclePrev<CR>", desc = "Prev tab" },
-		},
-		opts = {
-			options = {
-				mode = "tabs",
-				separator_style = "slant",
-				show_buffer_close_icons = false,
-				show_close_icon = false,
-			},
-		},
-	},
-	{
 		"rcarriga/nvim-notify",
 		config = function()
 			-- Configure nvim-notify
@@ -148,5 +109,46 @@ return {
 			})
 		end,
 		desc = "Notification system with fade in and slide out animation",
+	},
+	{
+		"akinsho/bufferline.nvim",
+		version = "*",
+		dependencies = "nvim-tree/nvim-web-devicons",
+		config = function()
+			require("nvim-web-devicons").setup({})
+			require("bufferline").setup({
+				options = {
+					mode = "buffers",
+					themable = true,
+					numbers = "ordinal",
+					close_command = "bdelete! %d",
+					right_mouse_command = "bdelete! %d",
+					left_mouse_command = "buffer %d",
+					middle_mouse_command = nil,
+					buffer_close_icon = "󰅖",
+					modified_icon = "● ",
+					close_icon = " ",
+					left_trunc_marker = " ",
+					right_trunc_marker = " ",
+					tab_size = 20,
+					diagnostics = "nvim_lsp",
+					offsets = {
+						{
+							filetype = "NvimTree",
+							text = "File Explorer",
+							text_align = "left",
+							separator = true,
+						},
+					},
+					color_icons = true,
+					show_buffer_icons = true,
+					show_buffer_close_icons = true,
+					show_close_icon = true,
+					separator_style = "slant",
+					enforce_regular_tabs = true,
+					always_show_bufferline = true,
+				},
+			})
+		end,
 	},
 }

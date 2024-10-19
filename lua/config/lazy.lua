@@ -46,13 +46,3 @@ require("lazy").setup({
 		},
 	},
 })
-
-vim.api.nvim_set_keymap("n", "BC", ":BufferClose<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap(
-	"n",
-	"BC",
-	[[:lua vim.cmd('BufferGoto ' .. string.char(vim.fn.getchar()))<CR>]],
-	{ noremap = true, silent = true }
-)
-vim.api.nvim_set_keymap("n", "BN", ":BufferNext<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "BP", ":BufferPrevious<CR>", { noremap = true, silent = true })
