@@ -23,7 +23,7 @@ return {
 		config = function()
 			require("bufferline").setup({
 				options = {
-					separator_style = "slope",
+					separator_style = "slant",
 					always_show_bufferline = true,
 					show_close_icon = false,
 					show_buffer_close_icons = false,
@@ -33,26 +33,26 @@ return {
 				highlights = {
 					background = {
 						fg = "#6d6d6d",
-						bg = "#1c1c1c",
+						bg = "#101010",
 					},
 					buffer_selected = {
 						fg = "#c2c2c2",
-						bg = "#212121",
+						bg = "#18181b",
 					},
 					buffer_visible = {
 						fg = "#c2c2c2",
-						bg = "#212121",
+						bg = "#18181b",
 					},
 					separator = {
-						bg = "#1c1c1c",
+						bg = "#101010",
 						fg = "#000000",
 					},
 					separator_selected = {
-						bg = "#212121",
+						bg = "#18181b",
 						fg = "#000000",
 					},
 					separator_visible = {
-						bg = "#212121",
+						bg = "#18181b",
 						fg = "#000000",
 					},
 				},

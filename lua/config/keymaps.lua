@@ -1,4 +1,5 @@
-vim.api.nvim_set_keymap("n", "yy", "01GvG$y", { noremap = true, silent = true })
+local opts = { noremap = true, silent = true }
+vim.api.nvim_set_keymap("n", "yy", "01GvG$y", opts)
 
 -- Telescope keymaps
 vim.api.nvim_set_keymap("n", "<Space>e", "", {
@@ -26,13 +27,13 @@ vim.api.nvim_set_keymap("n", "<Space>e", "", {
 })
 
 -- Buffer keymaps
-vim.api.nvim_set_keymap("n", "BB", ":bd<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap(
-	"n",
-	"B",
-	[[:lua vim.cmd('BufferGoto ' .. string.char(vim.fn.getchar()))<CR>]],
-	{ noremap = true, silent = true }
-)
-vim.api.nvim_set_keymap("n", "BN", ":BufferLineCycleNext<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "BP", ":BufferLineCyclePrev<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "BR", ":BufferRestore<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "BB", ":bd<CR>", opts)
+vim.api.nvim_set_keymap("n", "B", [[:lua vim.cmd('BufferGoto ' .. string.char(vim.fn.getchar()))<CR>]], opts)
+vim.api.nvim_set_keymap("n", "BN", ":BufferLineCycleNext<CR>", opts)
+vim.api.nvim_set_keymap("n", "BP", ":BufferLineCyclePrev<CR>", opts)
+vim.api.nvim_set_keymap("n", "BR", ":BufferRestore<CR>", opts)
+
+-- Split keymaps
+vim.api.nvim_set_keymap("n", "sv", ":split<CR>", opts)
+vim.api.nvim_set_keymap("n", "sh", ":vsplit<CR>", opts)
+vim.api.nvim_set_keymap("n", "so", ":only<CR>", opts)
