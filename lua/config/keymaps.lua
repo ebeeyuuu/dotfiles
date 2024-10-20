@@ -26,13 +26,13 @@ vim.api.nvim_set_keymap("n", "<Space>e", "", {
 })
 
 -- Buffer keymaps
-vim.api.nvim_set_keymap("n", "BB", ":BufferClose<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "BB", ":bd<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap(
 	"n",
 	"B",
 	[[:lua vim.cmd('BufferGoto ' .. string.char(vim.fn.getchar()))<CR>]],
 	{ noremap = true, silent = true }
 )
-vim.api.nvim_set_keymap("n", "BN", ":BufferNext<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "BP", ":BufferPrevious<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "BN", ":BufferLineCycleNext<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "BP", ":BufferLineCyclePrev<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "BR", ":BufferRestore<CR>", { noremap = true, silent = true })

@@ -29,7 +29,6 @@ vim.cmd([[
     Plug 'mfussenegger/nvim-lint'
     Plug 'nvim-lua/plenary.nvim'
     Plug 'nvim-lualine/lualine.nvim'
-    Plug 'romgrk/barbar.nvim'
     Plug 'lewis6991/gitsigns.nvim'
     Plug 'onsails/lspkind.nvim'
     Plug 'folke/lazydev.nvim'
@@ -40,6 +39,7 @@ vim.cmd([[
     Plug 'supermaven-inc/supermaven-nvim'
     Plug 'nanozuki/tabby.nvim'
     Plug 'nvim-telescope/telescope.nvim'
+    Plug 'akinsho/bufferline.nvim'
     Plug 'nvim-telescope/telescope-file-browser.nvim'
   call plug#end()
 ]])

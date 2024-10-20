@@ -17,6 +17,49 @@ return {
 		end,
 	},
 	{
+		"akinsho/bufferline.nvim",
+		dependencies = "nvim-tree/nvim-web-devicons",
+		version = "*",
+		config = function()
+			require("bufferline").setup({
+				options = {
+					separator_style = "slope",
+					always_show_bufferline = true,
+					show_close_icon = false,
+					show_buffer_close_icons = false,
+					modified_icon = "",
+					close_icon = "",
+				},
+				highlights = {
+					background = {
+						fg = "#6d6d6d",
+						bg = "#1c1c1c",
+					},
+					buffer_selected = {
+						fg = "#c2c2c2",
+						bg = "#212121",
+					},
+					buffer_visible = {
+						fg = "#c2c2c2",
+						bg = "#212121",
+					},
+					separator = {
+						bg = "#1c1c1c",
+						fg = "#000000",
+					},
+					separator_selected = {
+						bg = "#212121",
+						fg = "#000000",
+					},
+					separator_visible = {
+						bg = "#212121",
+						fg = "#000000",
+					},
+				},
+			})
+		end,
+	},
+	{
 		"folke/noice.nvim",
 		opts = function(_, opts)
 			table.insert(opts.routes, {
@@ -109,46 +152,5 @@ return {
 			})
 		end,
 		desc = "Notification system with fade in and slide out animation",
-	},
-	{
-		"akinsho/bufferline.nvim",
-		version = "*",
-		dependencies = "nvim-tree/nvim-web-devicons",
-		config = function()
-			require("nvim-web-devicons").setup({})
-			require("bufferline").setup({
-				options = {
-					mode = "buffers",
-					themable = true,
-					numbers = "ordinal",
-					close_command = "bdelete! %d",
-					right_mouse_command = "bdelete! %d",
-					left_mouse_command = "buffer %d",
-					middle_mouse_command = nil,
-					buffer_close_icon = "󰅖",
-					modified_icon = "● ",
-					close_icon = " ",
-					left_trunc_marker = " ",
-					right_trunc_marker = " ",
-					tab_size = 20,
-					diagnostics = "nvim_lsp",
-					offsets = {
-						{
-							filetype = "NvimTree",
-							text = "File Explorer",
-							text_align = "left",
-							separator = true,
-						},
-					},
-					color_icons = true,
-					show_buffer_icons = true,
-					show_buffer_close_icons = true,
-					show_close_icon = true,
-					separator_style = "slant",
-					enforce_regular_tabs = true,
-					always_show_bufferline = true,
-				},
-			})
-		end,
 	},
 }
