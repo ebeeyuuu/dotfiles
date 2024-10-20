@@ -12,6 +12,9 @@ require("config.keymaps")
 require("config.options")
 require("config.lazy")
 
+local discipline = require("ebeeyuuuu.discipline")
+discipline.discipline()
+
 vim.cmd([[
   call plug#begin('~/.local/share/nvim/plugged/')
     Plug 'neovim/nvim-lspconfig'

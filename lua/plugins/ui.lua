@@ -27,8 +27,8 @@ return {
 					always_show_bufferline = true,
 					show_close_icon = false,
 					show_buffer_close_icons = false,
-					modified_icon = "",
-					close_icon = "",
+					modified_icon = "+",
+					close_icon = "X",
 				},
 				highlights = {
 					background = {
@@ -54,6 +54,18 @@ return {
 					separator_visible = {
 						bg = "#18181b",
 						fg = "#000000",
+					},
+					modified = {
+						bg = "#18181b", -- background for icons in visible buffers
+						fg = "#c2c2c2", -- foreground for the icon
+					},
+					modified_selected = {
+						bg = "#18181b", -- background for icons in selected buffers
+						fg = "#c2c2c2", -- foreground for the icon
+					},
+					modified_visible = {
+						bg = "#101010", -- background for icons in non-selected buffers
+						fg = "#c2c2c2", -- foreground for the icon
 					},
 				},
 			})
