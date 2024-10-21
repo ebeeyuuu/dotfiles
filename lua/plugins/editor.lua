@@ -12,17 +12,6 @@ return {
 	},
 
 	{
-		"dinhhuy258/git.nvim",
-		event = "BufReadPre",
-		opts = {
-			keymaps = {
-				blame = "<Leader>gb",
-				browse = "<Leader>go",
-			},
-		},
-	},
-
-	{
 		"telescope.nvim",
 		dependencies = {
 			{
@@ -33,10 +22,20 @@ return {
 		},
 		keys = {
 			{
-				"<leader>fP",
+				"<leader>ff",
 				function()
 					require("telescope.builtin").find_files({
-						cwd = require("lazy.core.config").options.root,
+						path = vim.fn.getcwd(),
+						cwd = vim.fn.getcwd(),
+						prompt_title = "Find Files",
+						previewer = true,
+						layout_strategy = "horizontal",
+						layout_config = {
+							height = 0.8,
+							width = 0.95,
+							preview_width = 0.65,
+							preview_cutoff = 0,
+						},
 					})
 				end,
 				desc = "Find Plugin File",
@@ -46,7 +45,7 @@ return {
 				function()
 					local builtin = require("telescope.builtin")
 					builtin.live_grep({
-						prompt_title = "File Browser",
+						prompt_title = "Live Grep",
 						additional_args = { "--hidden" },
 						previewer = true,
 						layout_config = {

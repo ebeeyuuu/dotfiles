@@ -1,5 +1,4 @@
 return {
-	-- null-ls and formatting on save
 	{
 		"jose-elias-alvarez/null-ls.nvim",
 		opts = function(_, opts)
@@ -34,24 +33,53 @@ return {
 			end
 		end,
 	},
-	-- lspkind for icons
+
+	{
+		"neovim/nvim-lspconfig",
+		dependencies = {
+			"williamboman/mason.nvim", -- External tools
+			"williamboman/mason-lspconfig.nvim", -- Bridge between mason and lspconfig
+		},
+		config = function()
+			local lspconfig = require("lspconfig")
+			local mason_lspconfig = require("mason-lspconfig")
+
+			mason_lspconfig.setup({
+				ensure_installed = { "tsserver", "html", "cssls", "emmet_ls" }, -- Add your language servers here
+			})
+
+			mason_lspconfig.setup_handlers({
+				function(server_name)
+					lspconfig[server_name].setup({
+						capabilities = vim.lsp.protocol.make_client_capabilities(),
+						on_attach = function(client, bufnr)
+							if client.name == "tsserver" then
+								client.server_capabilities.documentFormattingProvider = false
+							end
+						end,
+					})
+				end,
+			})
+		end,
+	},
+
+	{
+		"williamboman/mason.nvim",
+		opts = {
+			ensure_installed = {
+				"prettier",
+				"typescript-language-server",
+				"html-lsp",
+				"css-lsp",
+			},
+		},
+	},
+
 	{
 		"onsails/lspkind.nvim",
 	},
 
-	-- nvim-cmp for completion with LSP
 	{
 		"hrsh7th/cmp-nvim-lsp",
-	},
-
-	-- mason for managing external tools
-	{
-		"williamboman/mason.nvim",
-		opts = function(_, opts)
-			vim.list_extend(opts.ensure_installed, {
-				"prettier",
-				"typescript-language-server",
-			})
-		end,
 	},
 }
