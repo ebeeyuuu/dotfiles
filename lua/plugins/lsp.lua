@@ -45,10 +45,6 @@ return {
 			local mason_lspconfig = require("mason-lspconfig")
 
 			local on_attach = function(client, bufnr)
-				if client.name == "tsserver" then
-					client.server_capabilities.documentFormattingProvider = false
-				end
-
 				local opts = { noremap = true, silent = true, buffer = bufnr }
 
 				vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts) -- Go to definition
@@ -64,7 +60,7 @@ return {
 			end
 
 			mason_lspconfig.setup({
-				ensure_installed = { "tsserver", "html", "cssls", "emmet_ls" }, -- Add your language servers here
+				ensure_installed = { "html", "cssls", "emmet_ls" }, -- Add your language servers here
 			})
 
 			mason_lspconfig.setup_handlers({

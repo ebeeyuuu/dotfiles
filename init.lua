@@ -1,22 +1,8 @@
 require("config.keymaps")
 require("config.options")
 require("config.lazy")
-
 require("plugins")
-
 require("ebeeyuuuu")
-
-vim.cmd([[
-  hi Normal guibg=NONE ctermbg=NONE
-  hi TelescopeNormal guibg=NONE ctermbg=NONE
-  hi TelescopeBorder guibg=NONE ctermbg=NONE
-  hi TelescopePromptNormal guibg=NONE ctermbg=NONE
-  hi TelescopePromptBorder guibg=NONE ctermbg=NONE
-  hi TelescopeResultsNormal guibg=NONE ctermbg=NONE
-  hi TelescopeResultsBorder guibg=NONE ctermbg=NONE
-  hi TelescopePreviewNormal guibg=NONE ctermbg=NONE
-  hi TelescopePreviewBorder guibg=NONE ctermbg=NONE
-]])
 
 require("telescope").setup({
 	defaults = {

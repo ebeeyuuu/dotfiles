@@ -186,6 +186,19 @@ return {
 					},
 				},
 			}
+
+			vim.cmd([[
+        hi Normal guibg=NONE guifg=#999999 ctermbg=NONE ctermfg=white
+        hi TelescopeNormal guibg=NONE guifg=#999999 ctermbg=NONE ctermfg=white
+        hi TelescopeBorder guibg=NONE guifg=#616161 ctermbg=NONE ctermfg=white
+        hi TelescopePromptNormal guibg=NONE guifg=#999999 ctermbg=NONE ctermfg=white
+        hi TelescopePromptBorder guibg=NONE guifg=#616161 ctermbg=NONE ctermfg=white
+        hi TelescopeResultsNormal guibg=NONE guifg=#999999 ctermbg=NONE ctermfg=white
+        hi TelescopeResultsBorder guibg=NONE guifg=#616161 ctermbg=NONE ctermfg=white
+        hi TelescopePreviewNormal guibg=NONE guifg=#999999 ctermbg=NONE ctermfg=white
+        hi TelescopePreviewBorder guibg=NONE guifg=#616161 ctermbg=NONE ctermfg=white
+      ]])
+
 			telescope.setup(opts)
 			require("telescope").load_extension("file_browser")
 		end,

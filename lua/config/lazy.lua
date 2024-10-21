@@ -24,6 +24,9 @@ require("lazy").setup({
 		{ import = "plugins" },
 		{ "nvim-neo-tree/neo-tree.nvim", enabled = false },
 		{ "folke/which-key.nvim", enabled = false },
+		{ import = "lazyvim.plugins.extras.linting.eslint" },
+		{ import = "lazyvim.plugins.extras.formatting.prettier" },
+		{ import = "lazyvim.plugins.extras.lang.typescript" },
 	},
 	defaults = {
 		lazy = false,
