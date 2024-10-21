@@ -1,6 +1,5 @@
 return {
 	{
-		enabled = false,
 		"folke/flash.nvim",
 		opts = {
 			search = {

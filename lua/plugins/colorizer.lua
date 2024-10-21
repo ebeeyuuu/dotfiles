@@ -15,7 +15,7 @@ return {
 			-- Attach colorizer to current buffer
 			vim.api.nvim_set_keymap(
 				"n",
-				"<leader>ac", -- Leader key followed by 'ac' to attach colorizer
+				"ac", -- Leader key followed by 'ac' to attach colorizer
 				[[<cmd>ColorizerAttachToBuffer<CR>]],
 				{ noremap = true, silent = true }
 			)
@@ -23,7 +23,7 @@ return {
 			-- Detach colorizer from current buffer
 			vim.api.nvim_set_keymap(
 				"n",
-				"<leader>dc", -- Leader key followed by 'dc' to detach colorizer
+				"dc", -- Leader key followed by 'dc' to detach colorizer
 				[[<cmd>ColorizerDetachFromBuffer<CR>]],
 				{ noremap = true, silent = true }
 			)

@@ -37,3 +37,17 @@ vim.api.nvim_set_keymap("n", "BR", ":BufferRestore<CR>", opts)
 vim.api.nvim_set_keymap("n", "sv", ":split<CR>", opts)
 vim.api.nvim_set_keymap("n", "sh", ":vsplit<CR>", opts)
 vim.api.nvim_set_keymap("n", "so", ":only<CR>", opts)
+vim.api.nvim_set_keymap("n", "sdk", "<C-w>k", opts)
+vim.api.nvim_set_keymap("n", "sdj", "<C-w>j", opts)
+vim.api.nvim_set_keymap("n", "sdl", "<C-w>l", opts)
+vim.api.nvim_set_keymap("n", "sdh", "<C-w>h", opts)
+
+--Undotree keymaps
+vim.api.nvim_set_keymap("n", "utf", ":UndotreeFocus<CR>", opts)
+vim.api.nvim_set_keymap("n", "ut", ":UndotreeToggle<CR>", opts)
+
+-- Other keymaps
+vim.keymap.set("n", "+", "<C-a>", opts)
+vim.keymap.set("n", "-", "<C-x>", opts)
+vim.keymap.set("n", "dw", 'vb"_d', opts)
+vim.keymap.set("n", "<C-a>", "gg<S-v>G", opts)

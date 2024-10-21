@@ -34,29 +34,6 @@ return {
 			end
 		end,
 	},
-
-	-- lsp config for TypeScript and others
-	{
-		"neovim/nvim-lspconfig",
-		opts = function(_, opts)
-			local lspconfig = require("lspconfig")
-
-			-- tsserver configuration
-			lspconfig.tsserver.setup({
-				on_attach = function(client, bufnr)
-					client.server_capabilities.documentFormattingProvider = false
-					client.server_capabilities.diagnosticProvider = false
-					vim.diagnostic.config({
-						severity_sort = true,
-						virtual_text = {
-							severity = { min = vim.diagnostic.severity.WARN },
-						},
-					})
-				end,
-			})
-		end,
-	},
-
 	-- lspkind for icons
 	{
 		"onsails/lspkind.nvim",

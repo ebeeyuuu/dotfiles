@@ -19,7 +19,7 @@ return {
 			-- Toggle Cloak
 			vim.api.nvim_set_keymap(
 				"n",
-				"<leader>tc", -- Leader key followed by 'tc' to toggle cloak
+				"tc", -- Leader key followed by 'tc' to toggle cloak
 				[[<cmd>lua require('cloak').toggle()<CR>]],
 				{ noremap = true, silent = true }
 			)
@@ -27,7 +27,7 @@ return {
 			-- Check if Cloak is enabled
 			vim.api.nvim_set_keymap(
 				"n",
-				"<leader>ce", -- Leader key followed by 'ce' to check cloak status
+				"ce", -- Leader key followed by 'ce' to check cloak status
 				[[<cmd>lua print("Cloak is " .. (require('cloak').is_enabled() and "enabled" or "disabled"))<CR>]],
 				{ noremap = true, silent = true }
 			)
@@ -35,7 +35,7 @@ return {
 			-- Show Cloaked patterns
 			vim.api.nvim_set_keymap(
 				"n",
-				"<leader>cp", -- Leader key followed by 'cp' to print cloaked patterns
+				"cp", -- Leader key followed by 'cp' to print cloaked patterns
 				[[<cmd>lua require('cloak').print_patterns()<CR>]],
 				{ noremap = true, silent = true }
 			)
