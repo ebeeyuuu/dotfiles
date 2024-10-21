@@ -92,9 +92,181 @@ return {
 
 	{
 		"onsails/lspkind.nvim",
+		config = function()
+			require("lspkind").init({
+				mode = "symbol_text",
+				preset = "codicons",
+				symbol_map = {
+					Text = "󰉿",
+					Method = "󰆧",
+					Function = "󰊕",
+					Constructor = "",
+					Field = "󰜢",
+					Variable = "󰀫",
+					Class = "󰠱",
+					Interface = "",
+					Module = "",
+					Property = "󰜢",
+					Unit = "󰑭",
+					Value = "󰎠",
+					Enum = "",
+					Keyword = "󰌋",
+					Snippet = "",
+					Color = "󰏘",
+					File = "󰈙",
+					Reference = "󰈇",
+					Folder = "󰉋",
+					EnumMember = "",
+					Constant = "󰏿",
+					Struct = "󰙅",
+					Event = "",
+					Operator = "󰆕",
+				},
+			})
+		end,
+	},
+	{
+		"hrsh7th/cmp-nvim-lsp",
+		dependencies = "hrsh7th/nvim-cmp",
+		config = function()
+			local cmp = require("cmp")
+			local luasnip = require("luasnip")
+
+			require("luasnip.loaders.from_vscode").lazy_load()
+
+			-- Setup cmp
+			cmp.setup({
+				snippet = {
+					expand = function(args)
+						luasnip.lsp_expand(args.body)
+					end,
+				},
+				mapping = cmp.mapping.preset.insert({
+					-- Tab and Shift-Tab to navigate completion menu
+					["<Tab>"] = cmp.mapping(function(fallback)
+						if cmp.visible() then
+							cmp.select_next_item()
+						elseif luasnip.expand_or_jumpable() then
+							luasnip.expand_or_jump()
+						else
+							fallback()
+						end
+					end, { "i", "s" }),
+
+					["<S-Tab>"] = cmp.mapping(function(fallback)
+						if cmp.visible() then
+							cmp.select_prev_item()
+						elseif luasnip.jumpable(-1) then
+							luasnip.jump(-1)
+						else
+							fallback()
+						end
+					end, { "i", "s" }),
+
+					-- Enter to confirm the completion
+					["<CR>"] = cmp.mapping.confirm({ select = true }),
+
+					-- Escape to close completion
+					["<Esc>"] = cmp.mapping(function(fallback)
+						if cmp.visible() then
+							cmp.close()
+						else
+							fallback()
+						end
+					end, { "i", "s" }),
+				}),
+				sources = cmp.config.sources({
+					{ name = "nvim_lsp" },
+					{ name = "luasnip" }, -- LuaSnip source
+				}),
+			})
+
+			-- Automatically load snippets excluding 'uuid'
+			require("luasnip.loaders.from_vscode").lazy_load({ exclude = { "uuid" } })
+		end,
+	},
+
+	-- LuaSnip configuration for managing snippets
+	{
+		"L3MON4D3/LuaSnip",
+		dependencies = {
+			"rafamadriz/friendly-snippets", -- Adds predefined snippets
+		},
+		config = function()
+			local luasnip = require("luasnip")
+			require("luasnip.loaders.from_vscode").lazy_load()
+
+			-- Define custom snippets
+			luasnip.snippets = {
+				all = {
+					-- Other custom snippets here
+				},
+				typescript = {
+					luasnip.snippet("clg", {
+						luasnip.text_node("console.log("),
+						luasnip.insert_node(1),
+						luasnip.text_node(");"),
+					}),
+				},
+				react = {
+					luasnip.snippet("rfc", {
+						luasnip.text_node("import React from 'react';\n\n"),
+						luasnip.text_node("const "),
+						luasnip.insert_node(1, "ComponentName"),
+						luasnip.text_node(" = () => {\n  return (\n    <div>"),
+						luasnip.insert_node(2, "Your content"),
+						luasnip.text_node("</div>\n  );\n};\n\nexport default "),
+						luasnip.insert_node(3, "ComponentName"),
+						luasnip.text_node(";"),
+					}),
+				},
+				javascript = {
+					luasnip.snippet("fn", {
+						luasnip.text_node("function "),
+						luasnip.insert_node(1, "name"),
+						luasnip.text_node("() {\n  "),
+						luasnip.insert_node(2, "// body"),
+						luasnip.text_node("\n}"),
+					}),
+				},
+				css = {
+					luasnip.snippet("bg", {
+						luasnip.text_node("background: "),
+						luasnip.insert_node(1, "color"),
+						luasnip.text_node(";"),
+					}),
+				},
+				html = {
+					luasnip.snippet("html5", {
+						luasnip.text_node("<!DOCTYPE html>\n<html>\n<head>\n  <title>"),
+						luasnip.insert_node(1, "Document"),
+						luasnip.text_node("</title>\n</head>\n<body>\n  "),
+						luasnip.insert_node(2),
+						luasnip.text_node("\n</body>\n</html>"),
+					}),
+				},
+				lua = {
+					luasnip.snippet("req", {
+						luasnip.text_node("local "),
+						luasnip.insert_node(1, "module"),
+						luasnip.text_node(" = require('"),
+						luasnip.insert_node(2, "module"),
+						luasnip.text_node("')"),
+					}),
+				},
+			}
+
+			-- Filter out unwanted snippets like 'uuid'
+			luasnip.snippets.all = vim.tbl_filter(function(snippet)
+				return snippet.name ~= "uuid"
+			end, luasnip.snippets.all)
+		end,
 	},
 
 	{
-		"hrsh7th/cmp-nvim-lsp",
+		"hrsh7th/nvim-cmp",
+		config = function()
+			-- Additional cmp configuration is in the hrsh7th/cmp-nvim-lsp setup
+		end,
 	},
 }

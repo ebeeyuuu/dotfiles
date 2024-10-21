@@ -11,4 +11,5 @@ return {
 	require("plugins.prettier"),
 	require("plugins.editor"),
 	require("plugins.undotree"),
+	require("plugins.treesitter"),
 }

@@ -23,7 +23,7 @@ return {
 			-- Toggle Harpoon Menu
 			vim.api.nvim_set_keymap(
 				"n",
-				"hh",
+				"<leader>hh",
 				[[<cmd>lua require('harpoon.ui').toggle_quick_menu()<CR>]],
 				{ noremap = true, silent = true }
 			)
