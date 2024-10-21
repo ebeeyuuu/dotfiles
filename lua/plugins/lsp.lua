@@ -44,6 +44,25 @@ return {
 			local lspconfig = require("lspconfig")
 			local mason_lspconfig = require("mason-lspconfig")
 
+			local on_attach = function(client, bufnr)
+				if client.name == "tsserver" then
+					client.server_capabilities.documentFormattingProvider = false
+				end
+
+				local opts = { noremap = true, silent = true, buffer = bufnr }
+
+				vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts) -- Go to definition
+				vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts) -- Go to declaration
+				vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts) -- Go to implementation
+				vim.keymap.set("n", "gr", vim.lsp.buf.references, opts) -- List references
+				vim.keymap.set("n", "K", vim.lsp.buf.hover, opts) -- Show hover information
+				vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts) -- Rename symbol
+				vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts) -- Open code actions
+				vim.keymap.set("n", "<leader>dl", vim.diagnostic.open_float, opts) -- Open diagnostic in floating window
+				vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts) -- Go to previous diagnostic
+				vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts) -- Go to next diagnostic
+			end
+
 			mason_lspconfig.setup({
 				ensure_installed = { "tsserver", "html", "cssls", "emmet_ls" }, -- Add your language servers here
 			})
@@ -52,11 +71,7 @@ return {
 				function(server_name)
 					lspconfig[server_name].setup({
 						capabilities = vim.lsp.protocol.make_client_capabilities(),
-						on_attach = function(client, bufnr)
-							if client.name == "tsserver" then
-								client.server_capabilities.documentFormattingProvider = false
-							end
-						end,
+						on_attach = on_attach,
 					})
 				end,
 			})

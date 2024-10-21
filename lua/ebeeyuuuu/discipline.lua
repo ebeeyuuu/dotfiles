@@ -35,6 +35,4 @@ function M.discipline()
 	end
 end
 
-M.discipline()
-
 return M

@@ -4,8 +4,7 @@ require("config.lazy")
 
 require("plugins")
 
-local discipline = require("ebeeyuuuu.discipline")
-discipline.discipline()
+require("ebeeyuuuu")
 
 vim.cmd([[
   hi Normal guibg=NONE ctermbg=NONE
