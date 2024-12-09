@@ -1,13 +1,19 @@
 local wezterm = require("wezterm")
+local mux = wezterm.mux
 local nf = wezterm.nerdfonts
 
-local GLYPH_SCIRCLE_LEFT = nf.ple_lower_right_triangle
-local GLYPH_SCIRCLE_RIGHT = nf.ple_lower_left_triangle
+local left_arrow = nf.ple_lower_right_triangle
+local right_arrow = nf.ple_lower_left_triangle
+
+wezterm.on("gui-startup", function(cmd)
+  local tab, pane, window = mux.spawn_window(cmd or {})
+  window:gui_window():maximize()
+end)
 
 wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
-  local active_bg = "#000027"
+  local active_bg = "#13161d"
   local active_fg = "#D1D9E6"
-  local inactive_bg = "#000011"
+  local inactive_bg = "#0c0e14"
   local inactive_fg = "#A3B2C8"
   local hover_bg = "#000023"
   local hover_fg = "#E4ECF5"
@@ -16,20 +22,20 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
   local background = is_active and active_bg or (hover and hover_bg or inactive_bg)
   local foreground = is_active and active_fg or (hover and hover_fg or inactive_fg)
 
-  local triangle_color = is_active and "#000027" or "#000011"
+  local triangle_color = is_active and "#13161d" or "#0c0e14"
 
   local title = tab.active_pane.title
 
   return {
     { Foreground = { Color = triangle_color } },
-    { Background = { Color = "none" } },
-    { Text = GLYPH_SCIRCLE_LEFT },
+    { Background = { Color = "#000000" } },
+    { Text = left_arrow },
     { Background = { Color = background } },
     { Foreground = { Color = foreground } },
     { Text = " " .. title .. " " },
     { Foreground = { Color = triangle_color } },
-    { Background = { Color = "none" } },
-    { Text = GLYPH_SCIRCLE_RIGHT },
+    { Background = { Color = "#000000" } },
+    { Text = right_arrow },
   }
 end)
 
@@ -44,7 +50,7 @@ local appearance = {
     cursor_fg = "#c2c2c2",
     cursor_border = "#c2c2c2",
     tab_bar = {
-      background = "#1a1a1a",
+      background = "#000000",
       active_tab = {
         bg_color = "#002147",
         fg_color = "#c0c0c0",
@@ -59,9 +65,13 @@ local appearance = {
         bg_color = "#222222",
         fg_color = "#c0c0c0",
       },
-      new_tab_hover = {
-        bg_color = "#222222",
+      new_tab = {
+        bg_color = "#000000",
         fg_color = "#c0c0c0",
+      },
+      new_tab_hover = {
+        bg_color = "#000000",
+        fg_color = "#e0e0e0",
       },
     },
   },
@@ -70,8 +80,16 @@ local appearance = {
   window_frame = {
     font = wezterm.font("CaskaydiaCove Nerd Font"),
     font_size = 18.0,
-    active_titlebar_bg = '#000000',
-    inactive_titlebar_bg = '#000000',
+    active_titlebar_bg = "#000000",
+    inactive_titlebar_bg = "#000000",
+    border_left_width = "0.1cell",
+    border_right_width = "0.1cell",
+    border_bottom_height = "0.05cell",
+    border_top_height = "0.05cell",
+    border_left_color = "#28313b",
+    border_right_color = "#28313b",
+    border_bottom_color = "#28313b",
+    border_top_color = "#28313b",
   },
   window_padding = {
     top = 10,
@@ -79,6 +97,7 @@ local appearance = {
     bottom = 0,
     left = 10,
   },
+  window_close_confirmation = "NeverPrompt",
 }
 
 return appearance
