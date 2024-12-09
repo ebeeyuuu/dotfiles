@@ -5,28 +5,30 @@ local GLYPH_SCIRCLE_LEFT = nf.ple_lower_right_triangle
 local GLYPH_SCIRCLE_RIGHT = nf.ple_lower_left_triangle
 
 wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
-  local active_bg = "#0A1A2F"
+  local active_bg = "#000027"
   local active_fg = "#D1D9E6"
-  local inactive_bg = "#0E223A"
+  local inactive_bg = "#000011"
   local inactive_fg = "#A3B2C8"
-  local hover_bg = "#12334F"
+  local hover_bg = "#000023"
   local hover_fg = "#E4ECF5"
 
   local is_active = tab.is_active
   local background = is_active and active_bg or (hover and hover_bg or inactive_bg)
   local foreground = is_active and active_fg or (hover and hover_fg or inactive_fg)
 
-  local triangle_color = is_active and "#002147" or "#4F6D7A"
+  local triangle_color = is_active and "#000027" or "#000011"
 
   local title = tab.active_pane.title
 
   return {
-    { Background = { Color = "#000000" } },
     { Foreground = { Color = triangle_color } },
+    { Background = { Color = "none" } },
     { Text = GLYPH_SCIRCLE_LEFT },
+    { Background = { Color = background } },
     { Foreground = { Color = foreground } },
     { Text = " " .. title .. " " },
     { Foreground = { Color = triangle_color } },
+    { Background = { Color = "none" } },
     { Text = GLYPH_SCIRCLE_RIGHT },
   }
 end)
@@ -44,7 +46,7 @@ local appearance = {
     tab_bar = {
       background = "#1a1a1a",
       active_tab = {
-        bg_color = "#08302d",
+        bg_color = "#002147",
         fg_color = "#c0c0c0",
         intensity = "Bold",
       },
