@@ -54,9 +54,6 @@ local keys = {
   { key = "RightArrow", mods = mod.SUPER,     action = wezterm.action.SendString "\x1bOF" },
   { key = "Backspace",  mods = mod.SUPER,     action = wezterm.action.SendString "\x15" },
 
-  { key = "c",          mods = "CTRL|SHIFT",  action = wezterm.action.CopyTo("Clipboard") },
-  { key = "v",          mods = "CTRL|SHIFT",  action = wezterm.action.PasteFrom("Clipboard") },
-
   { key = "t",          mods = mod.SUPER,     action = wezterm.action.SpawnTab("DefaultDomain") },
   { key = "t",          mods = mod.SUPER_REV, action = wezterm.action.SpawnTab({ DomainName = "WSL:Ubuntu" }) },
   { key = "w",          mods = mod.SUPER_REV, action = wezterm.action.CloseCurrentTab({ confirm = false }) },
@@ -93,6 +90,23 @@ local keys = {
     key = "=",
     mods = "CMD|SHIFT",
     action = wezterm.action.IncreaseFontSize,
+  },
+  {
+    key = "m",
+    mods = "CMD",
+    action = wezterm.action_callback(function(window, _)
+      wezterm.run_child_process({
+        "osascript",
+        "-e",
+        [[
+        tell application "System Events"
+          tell process "WezTerm"
+            set value of attribute "AXMinimized" of window 1 to true
+          end tell
+        end tell
+        ]]
+      })
+    end),
   },
 
   { key = [[\]],   mods = mod.SUPER,     action = wezterm.action.SplitVertical({ domain = "CurrentPaneDomain" }) },

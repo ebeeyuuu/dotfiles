@@ -11,7 +11,7 @@ wezterm.on("gui-startup", function(cmd)
 end)
 
 wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
-  local active_bg = "#13161d"
+  local active_bg = "#1d222d"
   local active_fg = "#D1D9E6"
   local inactive_bg = "#0c0e14"
   local inactive_fg = "#A3B2C8"
@@ -22,9 +22,9 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
   local background = is_active and active_bg or (hover and hover_bg or inactive_bg)
   local foreground = is_active and active_fg or (hover and hover_fg or inactive_fg)
 
-  local triangle_color = is_active and "#13161d" or "#0c0e14"
+  local triangle_color = is_active and "#1d222d" or "#0c0e14"
 
-  local title = tab.active_pane.title
+  local title = "   " .. wezterm.truncate_right(tab.active_pane.title, max_width - 6) .. "   "
 
   return {
     { Foreground = { Color = triangle_color } },
@@ -32,7 +32,7 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
     { Text = left_arrow },
     { Background = { Color = background } },
     { Foreground = { Color = foreground } },
-    { Text = " " .. title .. " " },
+    { Text = title },
     { Foreground = { Color = triangle_color } },
     { Background = { Color = "#000000" } },
     { Text = right_arrow },
