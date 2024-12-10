@@ -36,7 +36,7 @@ if theplatform.is_mac then
   mod.SUPER = "SUPER"
   mod.SUPER_REV = "SUPER|CTRL"
 elseif theplatform.is_win or theplatform.is_linux then
-  mod.SUPER = "ALT"  -- Avoid conflicts with Windows key shortcuts
+  mod.SUPER = "ALT" -- Avoid conflicts with Windows key shortcuts
   mod.SUPER_REV = "ALT|CTRL"
 end
 
@@ -99,6 +99,14 @@ local keys = {
   { key = "f",     mods = "LEADER",      action = wezterm.action.ActivateKeyTable({ name = "resize_font", one_shot = false, timeout_milliseconds = 1000 }) },
   { key = "p",     mods = "LEADER",      action = wezterm.action.ActivateKeyTable({ name = "resize_pane", one_shot = false, timeout_milliseconds = 1000 }) },
 }
+
+for i = 1, 9 do
+  table.insert(keys, {
+    key = tostring(i),
+    mods = mod.SUPER,
+    action = wezterm.action.ActivateTab(i - 1),
+  })
+end
 
 local key_tables = {
   resize_font = {
