@@ -84,6 +84,16 @@ local keys = {
       window:set_inner_size(dimensions.pixel_width + 50, dimensions.pixel_height + 50)
     end)
   },
+  {
+    key = "-",
+    mods = "CMD|SHIFT",
+    action = wezterm.action.DecreaseFontSize,
+  },
+  {
+    key = "=",
+    mods = "CMD|SHIFT",
+    action = wezterm.action.IncreaseFontSize,
+  },
 
   { key = [[\]],   mods = mod.SUPER,     action = wezterm.action.SplitVertical({ domain = "CurrentPaneDomain" }) },
   { key = [[\]],   mods = mod.SUPER_REV, action = wezterm.action.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
