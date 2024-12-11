@@ -26,6 +26,8 @@ vim.keymap.set("n", "+", "<C-a>", opts)
 vim.keymap.set("n", "-", "<C-x>", opts)
 vim.keymap.set("n", "dw", 'vb"_d', opts)
 vim.keymap.set("n", "<C-a>", "gg<S-v>G", opts)
+vim.api.nvim_set_keymap("n", "<leader>tm", ":Telescope media_files<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader>ip", ":ImagePreviewToggle<CR>", { noremap = true, silent = true })
 
 vim.api.nvim_set_keymap("n", "<space>l", ":Lazy<CR>", opts)
 vim.api.nvim_set_keymap("n", "<space>m", ":Mason<CR>", opts)

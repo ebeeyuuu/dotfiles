@@ -11,6 +11,21 @@ return {
     },
     keys = {
       {
+        "<leader>fm",
+        function()
+          require("telescope").extensions.media_files.media_files({
+            previewer = true,
+            layout_strategy = "horizontal",
+            layout_config = {
+              height = 0.8,
+              width = 0.95,
+              preview_width = 0.65,
+            },
+          })
+        end,
+        desc = "Find Media Files",
+      },
+      {
         "<leader>ff",
         function()
           require("telescope.builtin").find_files({
@@ -192,23 +207,25 @@ return {
               height = 0.8,
             }
           })
-        }
+        },
+        media_files = {} -- Add this line to configure the media_files extension
       }
 
       vim.cmd([[
-        hi TelescopeNormal guibg=NONE guifg=#999999 ctermbg=NONE ctermfg=white
-        hi TelescopeBorder guibg=NONE guifg=#616161 ctermbg=NONE ctermfg=white
-        hi TelescopePromptNormal guibg=NONE guifg=#999999 ctermbg=NONE ctermfg=white
-        hi TelescopePromptBorder guibg=NONE guifg=#616161 ctermbg=NONE ctermfg=white
-        hi TelescopeResultsNormal guibg=NONE guifg=#999999 ctermbg=NONE ctermfg=white
-        hi TelescopeResultsBorder guibg=NONE guifg=#616161 ctermbg=NONE ctermfg=white
-        hi TelescopePreviewNormal guibg=NONE guifg=#999999 ctermbg=NONE ctermfg=white
-        hi TelescopePreviewBorder guibg=NONE guifg=#616161 ctermbg=NONE ctermfg=white
-      ]])
+    hi TelescopeNormal guibg=NONE guifg=#999999 ctermbg=NONE ctermfg=white
+    hi TelescopeBorder guibg=NONE guifg=#616161 ctermbg=NONE ctermfg=white
+    hi TelescopePromptNormal guibg=NONE guifg=#999999 ctermbg=NONE ctermfg=white
+    hi TelescopePromptBorder guibg=NONE guifg=#616161 ctermbg=NONE ctermfg=white
+    hi TelescopeResultsNormal guibg=NONE guifg=#999999 ctermbg=NONE ctermfg=white
+    hi TelescopeResultsBorder guibg=NONE guifg=#616161 ctermbg=NONE ctermfg=white
+    hi TelescopePreviewNormal guibg=NONE guifg=#999999 ctermbg=NONE ctermfg=white
+    hi TelescopePreviewBorder guibg=NONE guifg=#616161 ctermbg=NONE ctermfg=white
+  ]])
 
       telescope.setup(opts)
       require("telescope").load_extension("file_browser")
       require("telescope").load_extension("ui-select")
-    end,
+      require("telescope").load_extension("media_files") -- Load the media_files extension
+    end
   },
 }
