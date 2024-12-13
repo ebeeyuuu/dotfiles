@@ -208,7 +208,6 @@ return {
             }
           })
         },
-        media_files = {} -- Add this line to configure the media_files extension
       }
 
       vim.cmd([[
@@ -225,7 +224,6 @@ return {
       telescope.setup(opts)
       require("telescope").load_extension("file_browser")
       require("telescope").load_extension("ui-select")
-      require("telescope").load_extension("media_files") -- Load the media_files extension
     end
   },
 }

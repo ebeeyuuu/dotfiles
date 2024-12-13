@@ -46,6 +46,9 @@ return {
     require("luasnip.loaders.from_vscode").lazy_load()
 
     cmp.setup({
+      view = {
+        entries = "custom",
+      },
       snippet = {
         expand = function(args)
           luasnip.lsp_expand(args.body)
@@ -107,11 +110,11 @@ return {
       cmp_autopairs.on_confirm_done()
     )
 
-    vim.cmd([[
-      hi Pmenu guibg=NONE guifg=#616980
-      hi CmpItemSelected guibg=#2a2a2a guifg=#e4e4e4
-      hi CmpItemSelectedDefault guibg=#2a2a2a guifg=#e4e4e4
-      hi FloatBorder guibg=NONE guifg=#616980
-    ]])
+    vim.defer_fn(function()
+      vim.api.nvim_set_hl(0, "Pmenu", { bg = "#000000", fg = "#616980" })
+      vim.api.nvim_set_hl(0, "CmpItemMenu", { bg = "#000000", fg = "#616980" })
+      vim.api.nvim_set_hl(0, "CmpItemSelected", { bg = "#2a2a2a", fg = "#e4e4e4" })
+      vim.api.nvim_set_hl(0, "PmenuSel", { bg = "#2a2a2a", fg = "#e4e4e4" })
+    end, 100)
   end,
 }

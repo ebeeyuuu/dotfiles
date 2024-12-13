@@ -65,24 +65,6 @@ local keys = {
   { key = "n",          mods = mod.SUPER,     action = wezterm.action.SpawnWindow },
   {
     key = "-",
-    mods = mod.SUPER,
-    action = wezterm.action_callback(function(window, _)
-      local dimensions = window:get_dimensions()
-      if dimensions.is_full_screen then return end
-      window:set_inner_size(dimensions.pixel_width - 50, dimensions.pixel_height - 50)
-    end)
-  },
-  {
-    key = "=",
-    mods = mod.SUPER,
-    action = wezterm.action_callback(function(window, _)
-      local dimensions = window:get_dimensions()
-      if dimensions.is_full_screen then return end
-      window:set_inner_size(dimensions.pixel_width + 50, dimensions.pixel_height + 50)
-    end)
-  },
-  {
-    key = "-",
     mods = "CMD|SHIFT",
     action = wezterm.action.DecreaseFontSize,
   },
